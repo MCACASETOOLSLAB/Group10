@@ -1,0 +1,82 @@
+/* semaphore without busy waiting...
+When we use semaphores (or any other synchronization construct) to solve a concurrency problem
+(such as mutual exclusion or any of the other ones we shall see),  we usually want a solution that has no busy waiting. 
+*/
+#include<iostream.h>
+int door=1;
+int milk=0;
+
+class Husband
+{
+      public:
+             void signal()
+             {
+                  milk=1;
+                  door=0;
+             }
+             void wait()
+             {
+                  if(milk==0)
+                  {
+                             cout<<"\nMilk is not available";
+                             if(door==1)
+                             {
+                                 cout<<"Husband went to shop";
+                                 milk=1;
+                             }
+                             else
+                             {
+                                 cout<<"Wife has already went to buy milk";
+                                 milk=1;
+                             }
+                  }
+                  else
+                  cout<<"Milk is available";
+             }
+}
+class Wife
+{
+      public:
+              void signal()
+             {
+                  milk=1;
+                  door=0;
+             }
+             void wait()
+             {
+                  if(milk==0)
+                  {
+                             cout<<"\nMilk is not available";
+                             if(door==1)
+                             {
+                                 cout<<"Wife went to shop";
+                                 milk=1;
+                             }
+                             else
+                             {
+                                 cout<<"Husband has already went to buy milk";
+                                 milk=1;
+                             }
+                  }
+                  else
+                  cout<<"Milk is available";
+             }
+}
+int main()
+{
+    int choice;
+    Husband h;
+    Wife w;
+    cout<<"\nEnter your choice:\n 1 for Husband.\n2 for Wife.\n"
+    cin>>choice;
+    if(choice==1)
+    {
+    h.wait;
+    h.signal;
+    }
+    else
+    {
+    w.wait;
+    w.signal;
+    }
+}
