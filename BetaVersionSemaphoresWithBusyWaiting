@@ -1,0 +1,100 @@
+Beta Version of the Semaphore Code:: without graphics.
+
+
+#include<iostream>
+#include<conio.h>
+#include<windows.h>
+/*
+implementing Semaphores with Busy waiting. With  wife keep on cheking the door if her husband has arrived or not
+
+*/
+
+using namespace std;
+
+int door=1;  //semaphor
+int milk=0;
+
+class Husband
+{
+      public:
+             int checkDoor()
+             {
+              return door;    
+             }
+             
+             void wait()
+             {
+              if(door==0)
+              {
+               cout<<"Husband is waiting"<<endl;         
+               } 
+              else
+              {
+                door=0;
+                cout<<"Husband has gone out to get the milk"<<endl;
+                
+              }
+             }             
+              void signal()
+              {
+               door=1;
+               if(milk==0)
+               {
+                cout<<endl<<"Husband got the milk"<<endl;
+                cout<<endl<<"Wife:: My husband is the Best!!"<<endl;
+                milk=1;
+                }            
+                    
+              }
+};
+
+class Wife
+{
+  public:
+         void wait()
+         {
+          if(door==0)
+          cout<<"Wife is Waiting"<<endl;           
+           
+           else
+           {
+            door=0;
+             cout<<"Wife has gone out to get the Milk"<<endl;    
+              
+           }
+               
+         }
+         
+         void signal()
+         {
+          door=1;
+          if(milk==0)
+          {
+            cout<<"Wife got the milk"<<endl;         
+           cout<<"Husband:: My wife is the best!!"<<endl;     
+           milk=1;
+           }
+         }   
+};
+
+int main()
+{
+ 
+    Husband h;
+    Wife w;
+    int waitCount=5;
+    h.wait();
+    while(waitCount!=0) 
+    {
+     w.wait();
+     
+     Sleep(1000);
+     waitCount--;
+     }
+    h.signal();
+    w.signal();
+    
+
+getch();
+return 0;
+}
