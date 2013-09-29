@@ -1,0 +1,40 @@
+HUSBAND WIFE PROBLEM:
+The below described Husband Wife problem describes the problem associated with 
+shared resources in real life and in Operating System. It easily parallels the problem of process synchronization in an OS.
+
+Here there are two processes in the form of persons
+1. Husband
+2. Wife
+
+Here milk acts as shared resource required to prepare Tea between the two processes husband and wife.
+
+Both the persons wish to get the milk to prepare Tea. If Milk is not available,
+the husband goes to purchase milk without signalling to his wife and When wife notices it, she too does the same thing which results in problem 
+i.e. both of them goes out to fetch milk from the store without intimating each other, which results in the problem. 
+
+This problem can be seen in operating systems as well when there are more
+processes requesting shared resource at same time.
+
+To avoid this the two processes could have used some kind of mutual exclusion principle between themselves in the form of a message passed which would work as a signal to the wife to wait for the husband.
+
+To solve this problem, we can use a Monitor in the form of a watchman who keeps a watch on
+who goes out.  Whenever either husband or wife goes out to fetch milk, he notifies to the other person,
+and the other person donot go to fetch the milk or use some sort of message passing or a lock based system like semaphores
+. One more thing to add is the 'store' can act as a critical section, only one process should be allowed to enter at a time.
+
+Not just between husband and wife this problem could be generalized between more members of the family so there would be more than 2 processes searching for the shared resource milk In that case to avoid the problem of race condition, we can implement counting semaphore so that wen one process goes to fetch the milk, other processes should wait.
+
+Here,
+SEMAPHORE is: Watchman
+Shared Resource is: Milk
+
+We have solved this problem in 3 different modules:
+1. Using Monitors
+2. Using Semaphores with busy waiting
+3. Using Semaphores with out busy waiting
+
+Hence, we can easily do process synchronization between the Husband and Wife using above mentioned 3 techniques.
+
+
+
+
